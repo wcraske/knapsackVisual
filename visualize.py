@@ -4,19 +4,19 @@ def add_random_object():
     print("Add Random Object")
     add_random_object_button.config(relief=tk.SUNKEN)
     run_bottom_up_button.config(relief=tk.RAISED)
-    run_recursive_button.config(relief=tk.RAISED)
+    run_memFun_button.config(relief=tk.RAISED)
 
 def run_bottom_up():
     print("Run Bottom Up")
     add_random_object_button.config(relief=tk.RAISED)
     run_bottom_up_button.config(relief=tk.SUNKEN)
-    run_recursive_button.config(relief=tk.RAISED)
+    run_memFun_button.config(relief=tk.RAISED)
 
-def run_recursive():
-    print("Run Recursive")
+def run_memFun():
+    print("Run memFun")
     add_random_object_button.config(relief=tk.RAISED)
     run_bottom_up_button.config(relief=tk.RAISED)
-    run_recursive_button.config(relief=tk.SUNKEN)
+    run_memFun_button.config(relief=tk.SUNKEN)
 
 root = tk.Tk()
 root.title("Visualizer")
@@ -31,8 +31,8 @@ add_random_object_button.pack(side="left", padx=5, pady=5)
 run_bottom_up_button = tk.Button(button_frame, text="Run Bottom Up", command=run_bottom_up, relief=tk.RAISED)
 run_bottom_up_button.pack(side="left", padx=5, pady=5)
 
-run_recursive_button = tk.Button(button_frame, text="Run Recursive", command=run_recursive, relief=tk.RAISED)
-run_recursive_button.pack(side="left", padx=5, pady=5)
+run_memFun_button = tk.Button(button_frame, text="Run memFun", command=run_memFun, relief=tk.RAISED)
+run_memFun_button.pack(side="left", padx=5, pady=5)
 
 canvas = tk.Canvas(root, bg="white")
 canvas.pack(fill="both", expand=True)
