@@ -1,10 +1,47 @@
 import tkinter as tk
+import random
 
 def add_random_object():
     print("Add Random Object")
     add_random_object_button.config(relief=tk.SUNKEN)
     run_bottom_up_button.config(relief=tk.RAISED)
     run_memFun_button.config(relief=tk.RAISED)
+
+    canvas.delete("objects")
+    canvas.delete("labels")
+    
+    knapsack_width = 300
+    knapsack_height = 300
+    knapsack_x = 50
+    knapsack_y = 50
+    knapsack_capacity = 50
+
+    canvas.create_rectangle(knapsack_x, knapsack_y, knapsack_x + knapsack_width, knapsack_y + knapsack_height, outline="black")
+    canvas.create_text(knapsack_x + knapsack_width/2, knapsack_y - 20, text=f"Capacity: {knapsack_capacity}", tags="labels")
+
+    objects = [] 
+    COLORS = ["red", "orange", "yellow", "blue", "green", "purple", "gold", "magenta", "pink", "cyan"]
+
+    for i in range(10):
+        while True:
+            x = random.randint(400, 700)
+            y = random.randint(100, 500)
+            size = random.randint(30, 80)
+            weight = random.randint(1, 10)
+            price = size * 2  
+            overlap = False
+
+            for obj in objects:
+                if (x < obj[0] + obj[2] and x + size > obj[0] and y < obj[1] + obj[3] and y + size > obj[1]):
+                    overlap = True
+                    break
+
+            if not overlap:
+                color = COLORS.pop()
+                canvas.create_rectangle(x, y, x + size, y + size, fill=color, tags="objects")
+                canvas.create_text(x + size/2, y + size/2, text=f"Weight: {weight}\nPrice: {price}", tags="labels")
+                objects.append((x, y, size, size))
+                break
 
 def run_bottom_up():
     print("Run Bottom Up")
