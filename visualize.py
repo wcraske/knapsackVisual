@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 
 objects = []
-knapsack_space = 50
+knapsack_space = 30
 COLORS = ["red", "orange", "yellow", "blue", "green", "purple", "gold", "magenta", "pink", "cyan"]
 
 def add_random_object():
@@ -71,6 +71,7 @@ def run_bottom_up():
             j -= objects[i - 1][4]
 
     print("Selected objects:", knapsack_objects)
+    print(len(knapsack_objects))
 
 def run_memFun():
     print("Run memFun")
