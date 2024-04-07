@@ -16,7 +16,7 @@ def add_random_object():
     canvas.delete("labels")
     
     knapsack_width = 300
-    knapsack_height = 300
+    knapsack_height = 100
     knapsack_x = 50
     knapsack_y = 50
 
@@ -73,6 +73,25 @@ def run_bottom_up():
     print("Selected objects:", knapsack_objects)
     print(len(knapsack_objects))
 
+    knapsack_width = 300
+    knapsack_height = 100
+    knapsack_x = 50
+    knapsack_y = 50
+    x_offset = knapsack_x
+    y_offset = knapsack_y
+
+    for obj in knapsack_objects:
+        x, y, size, _, _, _ = obj
+        canvas.create_rectangle(x_offset, y_offset, x_offset + size, y_offset + size, fill="white", outline="black")
+        canvas.create_text(x_offset + size/2, y_offset + size/2, text=f"Weight: {obj[4]}\nPrice: {obj[5]}", anchor="center")
+        x_offset += size 
+
+
+
+
+
+
+    
 def run_memFun():
     print("Run memFun")
     add_random_object_button.config(relief=tk.RAISED)
