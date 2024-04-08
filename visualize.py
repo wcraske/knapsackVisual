@@ -52,7 +52,7 @@ def run_bottom_up():
     run_memFun_button.config(relief=tk.RAISED)
 
     numObjects = len(objects)
-    dyPro = [[0] * (knapsack_space + 1) for _ in range(numObjects + 1)]
+    dyPro = [[0] * (knapsack_space + 1) for x in range(numObjects + 1)]
 
     for i in range(1, numObjects + 1):
         for j in range(knapsack_space + 1):
@@ -93,10 +93,56 @@ def run_bottom_up():
 
     
 def run_memFun():
+    global objects, knapsack_space
     print("Run memFun")
     add_random_object_button.config(relief=tk.RAISED)
     run_bottom_up_button.config(relief=tk.RAISED)
     run_memFun_button.config(relief=tk.SUNKEN)
+
+    numObjects = len(objects)
+
+    memoryTable = [[-1] * (knapsack_space + 1) for x in range(numObjects + 1)]
+
+    def memoryFun(i, capacity):
+        if i == 0 or capacity == 0:
+            return 0
+        if memoryTable[i][capacity] != -1:
+            return memoryTable[i][capacity]
+        weight = objects[i - 1][4]
+        price = objects[i - 1][5]
+        if weight > capacity:
+            memoryTable[i][capacity] = memoryFun(i - 1, capacity)
+        else:
+            memoryTable[i][capacity] = max(memoryFun(i - 1, capacity), memoryFun(i - 1, capacity - weight) + price)
+        return memoryTable[i][capacity]
+
+    priceSum = memoryFun(numObjects, knapsack_space)
+
+
+    selected_objects = []
+    capacity = knapsack_space
+    for i in range(numObjects, 0, -1):
+        if memoryFun(i, capacity) != memoryFun(i - 1, capacity):
+            selected_objects.append(objects[i - 1])
+            capacity -= objects[i - 1][4]
+
+    print("Selected objects:", selected_objects)
+    print("Number of selected objects:", len(selected_objects))
+
+    knapsack_width = 300
+    knapsack_height = 100
+    knapsack_x = 50
+    knapsack_y = 50
+    x_offset = knapsack_x
+    y_offset = knapsack_y
+
+    for obj in selected_objects:
+        x, y, size, _, _, _ = obj
+        canvas.create_rectangle(x_offset, y_offset, x_offset + size, y_offset + size, fill="white", outline="black")
+        canvas.create_text(x_offset + size / 2, y_offset + size / 2, text=f"Weight: {obj[4]}\nPrice: {obj[5]}", anchor="center")
+        x_offset += size
+
+    
 
 root = tk.Tk()
 root.title("Visualizer")
