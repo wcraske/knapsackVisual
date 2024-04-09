@@ -15,8 +15,8 @@ def add_random_object():
     canvas.delete("objects")
     canvas.delete("labels")
     
-    knapsack_width = 300
-    knapsack_height = 100
+    knapsack_width = 370
+    knapsack_height = 80
     knapsack_x = 50
     knapsack_y = 50
 
@@ -71,9 +71,9 @@ def run_bottom_up():
             j -= objects[i - 1][4]
 
     print("Selected objects:", knapsack_objects)
-    print(len(knapsack_objects))
+    print("Total price:", dyPro[numObjects][knapsack_space]) 
 
-    knapsack_width = 300
+    knapsack_width = 360
     knapsack_height = 100
     knapsack_x = 50
     knapsack_y = 50
@@ -87,11 +87,6 @@ def run_bottom_up():
         x_offset += size 
 
 
-
-
-
-
-    
 def run_memFun():
     global objects, knapsack_space
     print("Run memFun")
@@ -118,7 +113,6 @@ def run_memFun():
 
     priceSum = memoryFun(numObjects, knapsack_space)
 
-
     selected_objects = []
     capacity = knapsack_space
     for i in range(numObjects, 0, -1):
@@ -128,6 +122,7 @@ def run_memFun():
 
     print("Selected objects:", selected_objects)
     print("Number of selected objects:", len(selected_objects))
+    print("Total price:", priceSum) 
 
     knapsack_width = 300
     knapsack_height = 100
@@ -141,7 +136,6 @@ def run_memFun():
         canvas.create_rectangle(x_offset, y_offset, x_offset + size, y_offset + size, fill="white", outline="black")
         canvas.create_text(x_offset + size / 2, y_offset + size / 2, text=f"Weight: {obj[4]}\nPrice: {obj[5]}", anchor="center")
         x_offset += size
-
     
 
 root = tk.Tk()
@@ -157,7 +151,7 @@ add_random_object_button.pack(side="left", padx=5, pady=5)
 run_bottom_up_button = tk.Button(button_frame, text="Run Bottom Up", command=run_bottom_up, relief=tk.RAISED)
 run_bottom_up_button.pack(side="left", padx=5, pady=5)
 
-run_memFun_button = tk.Button(button_frame, text="Run memFun", command=run_memFun, relief=tk.RAISED)
+run_memFun_button = tk.Button(button_frame, text="Run memory function", command=run_memFun, relief=tk.RAISED)
 run_memFun_button.pack(side="left", padx=5, pady=5)
 
 canvas = tk.Canvas(root, bg="white")
