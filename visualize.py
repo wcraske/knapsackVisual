@@ -73,7 +73,7 @@ def run_bottom_up():
     print("Selected objects:", knapsack_objects)
     print("Total price:", dyPro[numObjects][knapsack_space]) 
 
-    knapsack_width = 360
+    knapsack_width = 300
     knapsack_height = 100
     knapsack_x = 50
     knapsack_y = 50
